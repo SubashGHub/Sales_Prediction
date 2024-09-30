@@ -1,15 +1,19 @@
-import sys
-from datetime import datetime
+import logging
 
 
 class Logger:
-    current_time = datetime.now().replace(microsecond=0)
+    def __init__(self, log_file='output.log'):
+        # Configure the logging
+        logging.basicConfig(
+            filename=log_file,
+            filemode='a',  # Append mode
+            format='%(asctime)s - %(levelname)s \n %(message)s',  # Log format with timestamps
+            level=logging.INFO  # Log level set to INFO
+        )
 
-    def create_log(self, value_to_print):
-
-        # Redirect standard output to a file
-        original_stdout = sys.stdout  # Save a reference to the original standard output
-        with open('output.txt', 'a') as f:
-            sys.stdout = f  # Change the standard output to the file we created.
-            print(value_to_print)
-            sys.stdout = original_stdout  # Reset the standard output to its original value
+    def create_log(self, log_message):
+        """Logs the provided message to the log file."""
+        try:
+            logging.info(log_message)  # Log the message with an INFO level
+        except Exception as e:
+            logging.error(f"Failed to log message: {e}")

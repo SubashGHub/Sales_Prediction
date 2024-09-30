@@ -28,7 +28,6 @@ prt_dimension = f"File Dimension is : {data.ndim}"
 prt_columns_list = f'List of columns in the file : \n{data.columns}'
 
 # log creation
-log.create_log(log.current_time)
 log.create_log(prt_head)
 log.create_log(prt_shape)
 log.create_log(prt_dimension)
